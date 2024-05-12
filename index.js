@@ -27,9 +27,9 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/:date?", function (req, res) {
   const str = req.params.date
   // 将字符串转换 Date 对象，纯数值入参转换为 number
-  const date = str && new Date(/^\d*$/.test(str) ? +str : str)
+  const date = new Date(/^\d+$/.test(str) ? +str : str)
   // 存在且是有效日期时返回正确信息
-  if (str && date?.getTime()) res.json({ unix: date.getTime(), utc: date.toUTCString() });
+  if (date?.getTime()) res.json({ unix: date.getTime(), utc: date.toUTCString() });
   else res.json({ error : "Invalid Date" });
 });
 
